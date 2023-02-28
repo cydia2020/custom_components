@@ -101,10 +101,10 @@ void Wiegand::loop() {
       uint8_t key = KEYS[value_4_lsb];
       this->send_key_(key);
     } else if (value_4_lsb == 10) {
-      uint8_t key = "A";
+      uint8_t key = KEYS[value];
       this->send_key_(key);
     } else if (value_4_lsb == 11) {
-      uint8_t key = "B";
+      uint8_t key = KEYS[value];
       this->send_key_(key);
     }  
   } else if (count == 4) {
