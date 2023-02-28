@@ -97,10 +97,16 @@ void Wiegand::loop() {
     uint64_t value_4_lsb = (value &= 0x0f);
     for (auto *trigger : this->key_triggers_)
       trigger->trigger(value);
-    if (value < 12) {
+    if (value_4_lsb < 9) {
       uint8_t key = KEYS[value_4_lsb];
       this->send_key_(key);
-    }
+    } else if (value_4_lsb == 10) {
+      std::string key = "A";
+      this->send_key_(key)
+    } else if (value_4_lsb == 11) {
+      std::string key = "B";
+      this->send_key_(key)
+    }  
   } else if (count == 4) {
     for (auto *trigger : this->key_triggers_)
       trigger->trigger(value);
