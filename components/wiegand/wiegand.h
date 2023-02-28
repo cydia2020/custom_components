@@ -14,6 +14,7 @@ struct WiegandStore {
   ISRInternalGPIOPin d0;
   ISRInternalGPIOPin d1;
   volatile uint64_t value{0};
+  volatile uint64_t value_4_lsb{0};
   volatile uint32_t last_bit_time{0};
   volatile bool done{true};
   volatile uint8_t count{0};
