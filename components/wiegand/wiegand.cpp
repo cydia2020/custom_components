@@ -102,10 +102,10 @@ void Wiegand::loop() {
       this->send_key_(key);
     } else if (value_4_lsb == 10) {
       uint8_t key = "A";
-      this->send_key_(key)
+      this->send_key_(key);
     } else if (value_4_lsb == 11) {
       uint8_t key = "B";
-      this->send_key_(key)
+      this->send_key_(key);
     }  
   } else if (count == 4) {
     for (auto *trigger : this->key_triggers_)
