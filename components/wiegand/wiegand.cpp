@@ -93,6 +93,13 @@ void Wiegand::loop() {
     }
     for (auto *trigger : this->tag_triggers_)
       trigger->trigger(tag);
+  } else if (count == 8) {
+    for (auto *trigger : this->key_triggers_)
+      trigger->trigger(value);
+    if (value < 12) {
+      uint8_t key = KEYS[value];
+      this->send_key_(key);
+    }
   } else if (count == 4) {
     for (auto *trigger : this->key_triggers_)
       trigger->trigger(value);
