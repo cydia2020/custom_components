@@ -94,10 +94,11 @@ void Wiegand::loop() {
     for (auto *trigger : this->tag_triggers_)
       trigger->trigger(tag);
   } else if (count == 8) {
+    value_4_lsb = value &= 0x0f
     for (auto *trigger : this->key_triggers_)
       trigger->trigger(value);
     if (value < 12) {
-      uint8_t key = KEYS[value];
+      uint8_t key = KEYS[value_4_lsb];
       this->send_key_(key);
     }
   } else if (count == 4) {
