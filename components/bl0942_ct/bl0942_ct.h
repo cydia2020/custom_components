@@ -9,7 +9,7 @@ namespace esphome {
 namespace bl0942_ct {
 
 //BL0942 for current transformers
-static const float BL0942_PREF = 1670250000000/2679285553;
+static const float BL0942_PREF = 835125000000/2679285553;
 static const float BL0942_UREF = 209635500000/13198421;
 static const float BL0942_IREF = 76494500/609;
 static const float BL0942_EREF = 2935986328125/1097148416;
