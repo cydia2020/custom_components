@@ -8,7 +8,7 @@ Example:
 external_components:
   - source:
       type: git
-      url: https://github.com/ssieb/custom_components
+      url: https://github.com/cydia2020/custom_components
     components: [ keypad ]
 ```
 
