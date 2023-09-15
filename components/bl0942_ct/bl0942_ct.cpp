@@ -4,7 +4,7 @@
 namespace esphome {
 namespace bl0942_ct {
 
-static const char *const TAG = "bl0942";
+static const char *const TAG = "bl0942_ct";
 
 static const uint8_t BL0942_READ_COMMAND = 0x58;
 static const uint8_t BL0942_FULL_PACKET = 0xAA;
@@ -30,7 +30,7 @@ const uint8_t BL0942_INIT[5][6] = {
     // 0x181C = Half cycle, Fast RMS threshold 6172
     {BL0942_WRITE_COMMAND, BL0942_REG_I_FAST_RMS_CTRL, 0x1C, 0x18, 0x00, 0x1B}};
 
-void BL0942::loop() {
+void BL0942_CT::loop() {
   DataPacket buffer;
   if (!this->available()) {
     return;
@@ -46,7 +46,7 @@ void BL0942::loop() {
   }
 }
 
-bool BL0942::validate_checksum(DataPacket *data) {
+bool BL0942_CT::validate_checksum(DataPacket *data) {
   uint8_t checksum = BL0942_READ_COMMAND;
   // Whole package but checksum
   uint8_t *raw = (uint8_t *) data;
@@ -60,13 +60,13 @@ bool BL0942::validate_checksum(DataPacket *data) {
   return checksum == data->checksum;
 }
 
-void BL0942::update() {
+void BL0942_CT::update() {
   this->flush();
   this->write_byte(BL0942_READ_COMMAND);
   this->write_byte(BL0942_FULL_PACKET);
 }
 
-void BL0942::setup() {
+void BL0942_CT::setup() {
   for (auto *i : BL0942_INIT) {
     this->write_array(i, 6);
     delay(1);
@@ -74,7 +74,7 @@ void BL0942::setup() {
   this->flush();
 }
 
-void BL0942::received_package_(DataPacket *data) {
+void BL0942_CT::received_package_(DataPacket *data) {
   // Bad header
   if (data->frame_header != BL0942_PACKET_HEADER) {
     ESP_LOGI(TAG, "Invalid data. Header mismatch: %d", data->frame_header);
@@ -108,7 +108,7 @@ void BL0942::received_package_(DataPacket *data) {
            cf_cnt, total_energy_consumption, frequency, data->status);
 }
 
-void BL0942::dump_config() {  // NOLINT(readability-function-cognitive-complexity)
+void BL0942_CT::dump_config() {  // NOLINT(readability-function-cognitive-complexity)
   ESP_LOGCONFIG(TAG, "BL0942:");
   LOG_SENSOR("", "Voltage", this->voltage_sensor_);
   LOG_SENSOR("", "Current", this->current_sensor_);

@@ -29,7 +29,7 @@ struct DataPacket {
   uint8_t checksum;
 } __attribute__((packed));
 
-class BL0942 : public PollingComponent, public uart::UARTDevice {
+class BL0942_CT : public PollingComponent, public uart::UARTDevice {
  public:
   void set_voltage_sensor(sensor::Sensor *voltage_sensor) { voltage_sensor_ = voltage_sensor; }
   void set_current_sensor(sensor::Sensor *current_sensor) { current_sensor_ = current_sensor; }
