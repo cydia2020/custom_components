@@ -23,13 +23,13 @@ from esphome.const import (
 
 DEPENDENCIES = ["uart"]
 
-bl0942_ns = cg.esphome_ns.namespace("bl0942")
-BL0942 = bl0942_ns.class_("BL0942", cg.PollingComponent, uart.UARTDevice)
+bl0942_ns_ct = cg.esphome_ns.namespace("bl0942_ct")
+BL0942_CT = bl0942_ns_ct.class_("BL0942_CT", cg.PollingComponent, uart.UARTDevice)
 
 CONFIG_SCHEMA = (
     cv.Schema(
         {
-            cv.GenerateID(): cv.declare_id(BL0942),
+            cv.GenerateID(): cv.declare_id(BL0942_CT),
             cv.Optional(CONF_VOLTAGE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_VOLT,
                 accuracy_decimals=1,
